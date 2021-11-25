@@ -22,10 +22,10 @@
 .nav__logo {
     position: fixed;
     left: 0;
-    top: 2rem;
+    top: 1rem;
     width: 7rem;
     object-fit: contain;
-    padding-left: 2rem;
+    padding-left: 3rem;
     cursor: pointer;
 }
 

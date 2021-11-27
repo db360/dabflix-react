@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { auth } from "./firebase";
 
 function App() {
-  const user = null
+  const user = null;
+
+  useEffect(() => {
+
+    //listen for any authentification changes
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        //logged in
+        console.log(userAuth);
+      } else {
+        //Logged out
+      }
+    });
+
+    return unsubscribe;
+ 
+  }, []);
 
   return (
     <div className="app">
@@ -17,10 +30,10 @@ function App() {
         {!user ? (
           <LoginScreen />
         ) : (
-        <Routes>
-          <Route path="/" element={<HomeScreen />} />
-        </Routes>
-      )}
+          <Routes>
+            <Route path="/" element={<HomeScreen />} />
+          </Routes>
+        )}
       </Router>
     </div>
   );
